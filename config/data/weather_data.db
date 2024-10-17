@@ -1,0 +1,24 @@
+import requests
+import json
+
+def get_api_key():
+    with open('config/config.json') as f:
+        config = json.load(f)
+    return config["api_key"]
+
+def get_weather_data(city):
+    api_key = get_api_key()
+    url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}"
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()
+        return {
+            "city": city,
+            "temp": data["main"]["temp"] - 273.15,  # Kelvin to Celsius
+            "feels_like": data["main"]["feels_like"] - 273.15,
+            "weather": data["weather"][0]["main"],
+            "timestamp": data["dt"]
+        }
+    else:
+        print(f"Failed to get data for {city}. Status code: {response.status_code}")
+        return None

@@ -1,0 +1,8 @@
+{
+  "api_key": "your_openweather_api_key",
+  "cities": ["Delhi", "Mumbai", "Chennai", "Bangalore", "Kolkata", "Hyderabad"],
+  "interval_minutes": 5,
+  "temperature_unit": "Celsius", 
+  "threshold_temp": 35,
+  "threshold_duration": 2
+}
